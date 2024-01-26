@@ -14,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float _jumpGraceperiod;
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
-    //[SerializeField] private Gate _gate;
+    public bool HasControlOfMovement;
     public bool _Grounded => _controller.isGrounded;
 
     private CharacterController _controller;
@@ -44,6 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
         //_healthBar.SetMaxHealth(_maxHealth);
         //_headBob = GetComponentInChildren<CameraHeadBob>();
         _controller = GetComponent<CharacterController>();
+        HasControlOfMovement = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (SceneManager.GetActiveScene() == (SceneManager.GetSceneByBuildIndex(2)))
@@ -59,7 +60,7 @@ public class PlayerBehaviour : MonoBehaviour
             ScreenCapture.CaptureScreenshot("NEW.png", 1);
         }
         _timeSinceHit += Time.deltaTime;
-        if (!HasDied && !WonGame)
+        if (!HasDied && !WonGame && HasControlOfMovement)
         {
             Camera();
             _horizontalInput = (Input.GetAxis("Horizontal") * _horizontalSpeedMultiplier);
