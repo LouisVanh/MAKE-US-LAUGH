@@ -6,7 +6,6 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera _camera;
-    [SerializeField] private Transform _orientation;
     //[SerializeField] private HealthBarUI _healthBar;
     [Header("Settings")]
     [SerializeField] private float _mouseSensitivity = 2f;
@@ -60,9 +59,12 @@ public class PlayerBehaviour : MonoBehaviour
             ScreenCapture.CaptureScreenshot("NEW.png", 1);
         }
         _timeSinceHit += Time.deltaTime;
-        if (!HasDied && !WonGame && HasControlOfMovement)
+        if (!HasDied && !WonGame)
         {
             Camera();
+            if (HasControlOfMovement)
+            {
+
             _horizontalInput = (Input.GetAxis("Horizontal") * _horizontalSpeedMultiplier);
             _verticalInput = Input.GetAxis("Vertical");
             Sprinting();
@@ -76,6 +78,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 _jumpButtonPressedTime = Time.time;
                 _hasJumped = true;
+            }
             }
         }
     }

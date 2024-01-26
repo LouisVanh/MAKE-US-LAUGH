@@ -14,6 +14,8 @@ public class Unicycle : MonoBehaviour
     void Start()
     {
         _rigidbody = this.gameObject.GetComponent<Rigidbody>();
+        _rigidbody.automaticCenterOfMass = false;
+        _rigidbody.centerOfMass = - Vector3.up;
     }
 
     // Update is called once per frame
@@ -24,7 +26,8 @@ public class Unicycle : MonoBehaviour
             _characterController.enabled = false;
             _playerBehaviour.HasControlOfMovement = false;
             _ridingUnicycle = true;
-
+            _characterController.gameObject.transform.position = this.transform.position + new Vector3(0, 1, 0);
+            _characterController.gameObject.transform.SetParent((this.gameObject.transform));
         }
         if (_ridingUnicycle)
         {
@@ -42,9 +45,9 @@ public class Unicycle : MonoBehaviour
                 this.gameObject.transform.position += this.transform.parent.forward * Time.deltaTime * _forwardSpeed;
             }
         }
-        //if(Mathf.Abs(this.gameObject.transform.rotation.z) > 10)
-        //{
-        //    this.GetComponent<Rigidbody>().
-        //}
+        if(Mathf.Abs(this.gameObject.transform.rotation.z) > 40)
+        {
+            //    this.GetComponent<Rigidbody>().
+        }
     }
 }
