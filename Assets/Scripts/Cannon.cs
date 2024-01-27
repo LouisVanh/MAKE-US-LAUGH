@@ -14,6 +14,11 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _explosionForce;
     [SerializeField] private Vector3 _backflipSpeed;
+    [SerializeField] private AudioSource _playerAudioSource;
+    [SerializeField] private AudioClip _landSound;
+    [SerializeField] private AudioClip _cannonShotSound;
+    private int _timesUsed;
+
 
 
     private Rigidbody _rigidbody;
@@ -57,6 +62,9 @@ public class Cannon : MonoBehaviour
                 _rigidbody.AddForce(_explosionForce * _shootingDir.transform.forward, ForceMode.Impulse);
                 _rigidbody.AddTorque(_backflipSpeed) ;
                 _isShooting = true;
+                _playerAudioSource.PlayOneShot(_cannonShotSound);
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 0, 0));
+                _timesUsed++;
             }
         }
         if(_inCannon && Mathf.Abs(_rigidbody.position.y) < 0.5f)
@@ -71,7 +79,8 @@ public class Cannon : MonoBehaviour
             _rigidbody.freezeRotation = true;
             _rigidbody.transform.position = _shootingDir.position;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            //play landing sound TODO AUDIO
+            _playerAudioSource.Stop();
+            _playerAudioSource.PlayOneShot(_landSound);
         }
     }
 
@@ -82,5 +91,10 @@ public class Cannon : MonoBehaviour
             return true;
         }
         else return false;
+    }
+    public float RandomBetween(float min, float max)
+    {
+        float r = Random.Range(min, max);
+        return r;
     }
 }
