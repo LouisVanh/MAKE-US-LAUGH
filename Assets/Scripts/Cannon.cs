@@ -63,7 +63,7 @@ public class Cannon : MonoBehaviour
                 _rigidbody.AddTorque(_backflipSpeed) ;
                 _isShooting = true;
                 _playerAudioSource.PlayOneShot(_cannonShotSound);
-                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 0, 0));
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 25, this.gameObject.transform.rotation.z));;
                 _timesUsed++;
             }
         }
