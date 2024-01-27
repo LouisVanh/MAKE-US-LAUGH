@@ -13,6 +13,7 @@ public class Cannon : MonoBehaviour
     private bool _isShooting;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _explosionForce;
+    [SerializeField] private Vector3 _backflipSpeed;
 
 
     private Rigidbody _rigidbody;
@@ -47,7 +48,7 @@ public class Cannon : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && !_isShooting)
             {
                 _rigidbody.AddForce(_explosionForce * _shootingDir.transform.forward, ForceMode.Impulse);
-                _rigidbody.AddTorque(new Vector3(50,0.5f,0));
+                _rigidbody.AddTorque(_backflipSpeed) ;
                 _isShooting = true;
                 //this.gameObject.transform.Rotate(new Vector3(0, 0, Time.deltaTime * _speed));
                 //this.gameObject.transform.position += this.gameObject.transform.parent.forward * Time.deltaTime * _forwardSpeed;
