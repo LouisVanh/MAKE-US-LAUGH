@@ -23,11 +23,9 @@ public class Cannon : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        if (Input.GetKeyDown(KeyCode.X) && !_inCannon)
+        if (!_inCannon)
         {
             _characterController.enabled = false;
             _playerBehaviour.HasControlOfMovement = false;
@@ -36,6 +34,11 @@ public class Cannon : MonoBehaviour
             _characterController.gameObject.transform.position = this.transform.position + new Vector3(0, 1, 0);
             _characterController.gameObject.transform.SetParent((_rigidbody.gameObject.transform));
         }
+    }
+        // Update is called once per frame
+        void Update()
+    {
+
         if (_inCannon && !_isShooting)
         {
             if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
