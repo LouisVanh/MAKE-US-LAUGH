@@ -445,8 +445,9 @@ MonoBehaviour:
   _characterController: {fileID: 1276240292}
   _playerBehaviour: {fileID: 1276240291}
   _shootingDir: {fileID: 537371554}
+  _initialRigidbodyPosition: {x: 0, y: 0, z: 0}
   _inCannon: 0
-  _rotationSpeed: 0
+  _rotationSpeed: 14.77
   _explosionForce: 17
 --- !u!1 &323185003
 GameObject:
