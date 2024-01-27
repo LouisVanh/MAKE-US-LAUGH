@@ -35,10 +35,12 @@ public class PlayerBehaviour : MonoBehaviour
     [NonSerialized] public bool HasDied = false;
     [NonSerialized] public bool WonGame = false;
     private float _timeSinceHit;
+    public Vector3 _startRotation;
 
 
     void Start()
     {
+        _startRotation = this.gameObject.transform.rotation.ToEuler();
         //_healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarUI>();
         //_healthBar.SetMaxHealth(_maxHealth);
         //_headBob = GetComponentInChildren<CameraHeadBob>();
