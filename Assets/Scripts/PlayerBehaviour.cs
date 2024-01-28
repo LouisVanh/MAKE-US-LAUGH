@@ -14,6 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
     public bool HasControlOfMovement;
+    public GameObject RunCanvas;
+
     public bool _Grounded => _controller.isGrounded;
 
     private CharacterController _controller;
@@ -41,6 +43,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
+        RunCanvas = GameObject.Find("RunCanvas");
+
         LoseCanvas = GameObject.Find("LoseCanvas");
         LoseCanvas.SetActive(false);
         _startRotation = this.gameObject.transform.eulerAngles;
@@ -59,6 +63,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void Kill() {
         // open up death canvas
         Time.timeScale = 0;
+        
         LoseCanvas.SetActive(true);
     }
     void Update()
