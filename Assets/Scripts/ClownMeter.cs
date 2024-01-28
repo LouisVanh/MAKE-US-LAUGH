@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ClownMeter : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class ClownMeter : MonoBehaviour
     {
         //if()
         text.text = $"Clown entertainment: {Value} %";
-        Value -= Time.deltaTime * 0.2f;
+        Value -= Time.deltaTime * 0.3f;
     }
 
     public void ChangeMeter(float a)
@@ -76,10 +77,11 @@ public class ClownMeter : MonoBehaviour
 
             }
         }
-        if (Value < 100)
+        if (Value > 100)
         {
             foreach (Clown clown in _clownList)
             {
+                SceneManager.LoadScene(2); // WIN
 
             }
         }
