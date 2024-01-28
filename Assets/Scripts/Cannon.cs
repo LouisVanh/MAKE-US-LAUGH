@@ -63,11 +63,11 @@ public class Cannon : MonoBehaviour
                 _rigidbody.AddTorque(_backflipSpeed) ;
                 _isShooting = true;
                 _playerAudioSource.PlayOneShot(_cannonShotSound);
-                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 25, this.gameObject.transform.rotation.z));;
+                //this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 25, this.gameObject.transform.rotation.z));;
                 _timesUsed++;
             }
         }
-        if(_inCannon && Mathf.Abs(_rigidbody.position.y) < 0.5f)
+        if(_inCannon && (_rigidbody.position.y) < 0.5f)
         {
             _rigidbody.transform.DetachChildren();
             _characterController.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);

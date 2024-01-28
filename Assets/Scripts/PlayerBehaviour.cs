@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
-        _startRotation = this.gameObject.transform.rotation.ToEuler();
+        _startRotation = this.gameObject.transform.eulerAngles;
         //_healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarUI>();
         //_healthBar.SetMaxHealth(_maxHealth);
         _headBob = GetComponentInChildren<CameraHeadBob>();
@@ -53,7 +53,9 @@ public class PlayerBehaviour : MonoBehaviour
             //reset everything to good start values
         }
     }
-
+    public void Kill() { 
+    // open up death canvas
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F12))
@@ -66,7 +68,6 @@ public class PlayerBehaviour : MonoBehaviour
             Camera();
             if (HasControlOfMovement)
             {
-
             _horizontalInput = (Input.GetAxis("Horizontal") * _horizontalSpeedMultiplier);
             _verticalInput = Input.GetAxis("Vertical");
             Sprinting();
@@ -166,7 +167,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void Jumping()
     {
-
         if (Time.time - _lastGroundedTime <= _jumpGraceperiod)
         {
             if (Time.time - _jumpButtonPressedTime <= _jumpGraceperiod)
@@ -177,11 +177,4 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
     }
-    //private void PassiveHealing()
-    //{
-    //    if (_timeSinceHit > 3)
-    //    {
-    //        AddHealth(Time.deltaTime * 5);
-    //    }
-    //}
 }

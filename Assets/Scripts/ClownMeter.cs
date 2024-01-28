@@ -9,6 +9,7 @@ public class ClownMeter : MonoBehaviour
     private Clown[] _clownList;
     public Text text;
     public static ClownMeter Instance;
+    public GameObject RunCanvas;
 
     private void Awake()
     {
@@ -21,8 +22,8 @@ public class ClownMeter : MonoBehaviour
     {
         Value = 50; // start at neutral meter
         _clownList = GameObject.FindObjectsByType<Clown>(FindObjectsSortMode.None);
-        var run = GameObject.Find("RunCanvas");
-        run.SetActive(false);
+        RunCanvas = GameObject.Find("RunCanvas");
+        RunCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class ClownMeter : MonoBehaviour
     {
         //if()
         text.text = $"Clown meter score: {Value} / 100";
-        Value -= Time.deltaTime * 0.1f;
+        Value -= Time.deltaTime * 0.3f;
     }
 
     public void ChangeMeter(float a)
@@ -42,11 +43,14 @@ public class ClownMeter : MonoBehaviour
     {
         if (Value < 20)
         {
+            RunCanvas.SetActive(true);
+            var curtain = GameObject.Find("Curtains");
+            curtain.SetActive(false);
+
             foreach (Clown clown in _clownList)
             {
                 // change head mesh
-                var run = GameObject.Find("RunCanvas");
-                run.SetActive(true);
+                clown.Chase();
             }
         }
         if (Value < 40)
