@@ -10,6 +10,7 @@ public class ClownMeter : MonoBehaviour
     public Text text;
     public static ClownMeter Instance;
     public GameObject RunCanvas;
+    public bool IsAlreadyChasing;
 
     private void Awake()
     {
@@ -41,11 +42,12 @@ public class ClownMeter : MonoBehaviour
     }
     private void ChangeClownBehaviour()
     {
-        if (Value < 20)
+        if (Value < 20 && !IsAlreadyChasing)
         {
             RunCanvas.SetActive(true);
             var curtain = GameObject.Find("Curtains");
             curtain.SetActive(false);
+            IsAlreadyChasing = true;
 
             foreach (Clown clown in _clownList)
             {
