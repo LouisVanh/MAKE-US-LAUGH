@@ -2571,7 +2571,7 @@ GameObject:
   - component: {fileID: 495328345}
   - component: {fileID: 495328344}
   m_Layer: 5
-  m_Name: YouLoseScreen
+  m_Name: LoseCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6129,6 +6129,7 @@ MonoBehaviour:
   _maxHealth: 0
   HasControlOfMovement: 0
   _startRotation: {x: 0, y: 0, z: 0}
+  LoseCanvas: {fileID: 0}
 --- !u!143 &1276240292
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6622,6 +6623,7 @@ MonoBehaviour:
   Value: 0
   text: {fileID: 432863682}
   RunCanvas: {fileID: 0}
+  IsAlreadyChasing: 0
 --- !u!1001 &1301175104
 PrefabInstance:
   m_ObjectHideFlags: 0
