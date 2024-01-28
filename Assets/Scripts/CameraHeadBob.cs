@@ -7,7 +7,7 @@ public class CameraHeadBob : MonoBehaviour
     [Header("References")]
     public Vector3 _restPosition;
     private Transform _camera;
-
+    private PlayerBehaviour _player;
     [Header("Settings")]
     public float bobSpeed = 4.8f;
     public float bobAmount = 0.05f;
@@ -17,11 +17,12 @@ public class CameraHeadBob : MonoBehaviour
     private void Start()
     {
         _camera = GetComponent<Camera>().transform;
+        _player = GetComponentInParent<PlayerBehaviour>();
     }
     void Update()
     {
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && _player.HasControlOfMovement)
         {
             timer += bobSpeed * Time.deltaTime;
 
