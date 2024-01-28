@@ -13,7 +13,7 @@ public class TriggerWin : MonoBehaviour
         {
             CameraFade.Out(() =>
             {
-                SceneManager.LoadScene(2); // satan scene
+                SceneManager.LoadScene(2); // WIN
             }
             , 2f);
         }

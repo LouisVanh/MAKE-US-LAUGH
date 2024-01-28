@@ -55,6 +55,7 @@ public class Unicycle : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.D))
             {
+                _rigidbody.AddTorque(new Vector3(0, 0, -Time.deltaTime * _speed));
                 if (this.gameObject.transform.eulerAngles.z < -70 /*&& this.gameObject.transform.eulerAngles.z > 180*/) // prevent quaternion rotate from messing it up
                 {
                     _rigidbody.transform.DetachChildren();
@@ -67,7 +68,6 @@ public class Unicycle : MonoBehaviour
                     _playerBehaviour.HasControlOfMovement = true;
                     _broken = true;
                 }
-                _rigidbody.AddTorque(new Vector3(0, 0, -Time.deltaTime * _speed));
 
                 this.gameObject.transform.position += this.transform.parent.forward * Time.deltaTime * _forwardSpeed;
             }

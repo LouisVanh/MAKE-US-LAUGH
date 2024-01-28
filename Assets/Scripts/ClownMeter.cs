@@ -21,7 +21,7 @@ public class ClownMeter : MonoBehaviour
     }
     void Start()
     {
-        Value = 50; // start at neutral meter
+        Value = 25; // start at neutral meter
         _clownList = GameObject.FindObjectsByType<Clown>(FindObjectsSortMode.None);
         RunCanvas = GameObject.Find("RunCanvas");
         RunCanvas.SetActive(false);
@@ -31,8 +31,8 @@ public class ClownMeter : MonoBehaviour
     void Update()
     {
         //if()
-        text.text = $"Clown meter score: {Value} / 100";
-        Value -= Time.deltaTime * 0.3f;
+        text.text = $"Clown entertainment: {Value} %";
+        Value -= Time.deltaTime * 0.2f;
     }
 
     public void ChangeMeter(float a)
@@ -42,7 +42,7 @@ public class ClownMeter : MonoBehaviour
     }
     private void ChangeClownBehaviour()
     {
-        if (Value < 20 && !IsAlreadyChasing)
+        if (Value < 10 && !IsAlreadyChasing)
         {
             RunCanvas.SetActive(true);
             var curtain = GameObject.Find("Curtains");

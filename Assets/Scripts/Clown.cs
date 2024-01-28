@@ -38,8 +38,22 @@ public class Clown : MonoBehaviour // add an audiosource to the clown!
 
     public bool isDead;
     private Animator _animator;
+
+    [Header("Footstep Sounds")]
+    [SerializeField] private AudioClip _giggle1;
+    [SerializeField] private AudioClip _giggle2;
+    [SerializeField] private AudioClip _giggle3;
+    private List<AudioClip> _giggles;
+    [SerializeField] private AudioSource _giggleAudioSource;
+
     void Start()
     {
+        _giggles = new List<AudioClip>();
+        _giggles.Add(_giggle1);
+        _giggles.Add(_giggle2);
+        _giggles.Add(_giggle3);
+        _giggleAudioSource.volume = 0.2f;
+        InvokeRepeating(nameof(PlayGiggles), 1, Random.Range(5,15));
         Animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         //_skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -48,6 +62,14 @@ public class Clown : MonoBehaviour // add an audiosource to the clown!
         _agent = GetComponent<NavMeshAgent>();
         _enabled = false;
         _agent.enabled = false;
+    }
+    public void PlayGiggles()
+    {
+        if (_agent.enabled)
+        {
+            var soundToBePlayed = _giggles[UnityEngine.Random.Range(0, _giggles.Count)];
+            _giggleAudioSource.PlayOneShot(soundToBePlayed);
+        }
     }
     public void Chase()
     {

@@ -40,34 +40,37 @@ public class Cannon : MonoBehaviour
             _characterController.gameObject.transform.SetParent((_rigidbody.gameObject.transform));
         }
     }
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
 
         if (_inCannon && !_isShooting)
         {
             if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                if(IsBetweenFloats(0, 75, this.gameObject.transform.eulerAngles.x) && this.gameObject.transform.eulerAngles.x < 70)
-                    this.gameObject.transform.Rotate(new Vector3(Time.deltaTime * _rotationSpeed, 0, 0));
+                if (IsBetweenFloats(-50, 20, this.gameObject.transform.eulerAngles.z) || IsBetweenFloats(-50 + 360, 20 + 360, this.gameObject.transform.eulerAngles.z)/*&& this.gameObject.transform.eulerAngles.z < 20*/)
+                    this.gameObject.transform.Rotate(new Vector3(0, 0, Time.deltaTime * _rotationSpeed));
             }
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                if (IsBetweenFloats(0, 75, this.gameObject.transform.eulerAngles.x) && this.gameObject.transform.eulerAngles.x > 5)
-                    this.gameObject.transform.Rotate(new Vector3( -Time.deltaTime * _rotationSpeed, 0, 0));
+                if (IsBetweenFloats(-50, 20, this.gameObject.transform.eulerAngles.z) || IsBetweenFloats(-50 + 360, 20 + 360, this.gameObject.transform.eulerAngles.z)/* && this.gameObject.transform.eulerAngles.z > 20*/)
+                {
+                    //if()
+                    this.gameObject.transform.Rotate(0, 0, -Time.deltaTime * _rotationSpeed);
+                }
             }
             if (Input.GetKey(KeyCode.Space) && !_isShooting)
             {
                 _rigidbody.constraints = RigidbodyConstraints.None;
                 _rigidbody.AddForce(_explosionForce * _shootingDir.transform.forward, ForceMode.Impulse);
-                _rigidbody.AddTorque(_backflipSpeed) ;
+                _rigidbody.AddTorque(_backflipSpeed);
                 _isShooting = true;
                 _playerAudioSource.PlayOneShot(_cannonShotSound);
-                //this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(RandomBetween(10,70), 25, this.gameObject.transform.rotation.z));;
+                //this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(120, 0, RandomBetween(10, 70)));;
                 _timesUsed++;
             }
         }
-        if(_inCannon && (_rigidbody.position.y) < 0.5f)
+        if (_inCannon && (_rigidbody.position.y) < 0.5f)
         {
             _rigidbody.transform.DetachChildren();
             _characterController.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
