@@ -36,10 +36,13 @@ public class PlayerBehaviour : MonoBehaviour
     [NonSerialized] public bool WonGame = false;
     private float _timeSinceHit;
     public Vector3 _startRotation;
+    public GameObject loosecanvas;
 
 
     void Start()
     {
+        loosecanvas = GameObject.Find("LoseCanvas");
+        loosecanvas.SetActive(false);
         _startRotation = this.gameObject.transform.eulerAngles;
         //_healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarUI>();
         //_healthBar.SetMaxHealth(_maxHealth);
@@ -53,8 +56,9 @@ public class PlayerBehaviour : MonoBehaviour
             //reset everything to good start values
         }
     }
-    public void Kill() { 
-    // open up death canvas
+    public void Kill() {
+        // open up death canvas
+        //Time
     }
     void Update()
     {
